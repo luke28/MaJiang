@@ -1,0 +1,726 @@
+	int daSiXi();
+	int daSanYuan();
+	int lvYiSe();
+	int jiuBaoLianDeng();
+	int siGang();
+	int lianQiDui();
+	int shiSanYao();
+	int qingYaoJiu();
+	int xiaoSiXi();
+	int xiaoSanYuan();
+	int ziYiSe();
+	int siAnKe();
+	int yiSeShuangLongHui();
+	int yiSeSiTongShun();
+	int yiSeSiJieGao();
+	int yiSeSiBuGao();
+	int sanGang();
+	int hunYaoJiu();
+	int qiDui();
+	int qiXingBuKao();
+	int quanShuangKe();
+	int qingYiSe();
+	int yiSeSanJieGao();
+	int yiSeSanTongShun();
+	int quanDa();
+	int quanZhong();
+	int quanXiao();
+	int qingLong();
+	int sanSeShuangLongHui();
+	int yiSeSanBuGao();
+	int quanDaiWu();
+	int sanTongKe();
+	int sanAnKe();
+	int quanBuKao();
+	int zuHeLong();
+	int daYuWu();
+	int xiaoYuWu();
+	int sanFengKe();
+	int huaLong();
+	int tuiBuDao();
+	int sanSeSanTongShun();
+	int sanSeSanJieGao();
+	int wuFanHu();
+	int miaoShouHuiChun();
+	int haiDiLaoYue();
+	int gangShangKaiHua();
+	int qiangGangHu();
+	int pengPengHu();
+	int hunYiSe();
+	int sanSeSanBuGao();
+	int wuMenQi();
+	int quanQiuRen();
+	int shuangAnGang();
+	int shuangJianKe();
+	int quanDaiYao();
+	int buQiuRen();
+	int shuangMingGang();
+	int huJueZhang();
+	int jianKe();
+	int quanFengKe();
+	int menFengKe();
+	int menQianQing();
+	int pingHu();
+	int siGuiYi();
+	int shuangTongKe();
+	int shuangAnKe();
+	int anGang();
+	int duanYao();
+	int yiBanGao();
+	int xiXiangFeng();
+	int lianLiu();
+	int laoShaoFu();
+	int mingGang();
+	int yaoJiuKe();
+	int queYiMen();
+	int wuZi();
+	int bianZhang();
+	int keZhang();
+	int danDiaoJiang();
+	int ziMo();
+
+
+
+	func[(int)DaSiXi] = &SuanFan::daSiXi;
+	func[(int)DaSanYuan] = &SuanFan::daSanYuan;
+	func[(int)LvYiSe] = &SuanFan::lvYiSe;
+	func[(int)JiuBaoLianDeng] = &SuanFan::jiuBaoLianDeng;
+	func[(int)SiGang] = &SuanFan::siGang;
+	func[(int)LianQiDui] = &SuanFan::lianQiDui;
+	func[(int)ShiSanYao] = &SuanFan::shiSanYao;
+	func[(int)QingYaoJiu] = &SuanFan::qingYaoJiu;
+	func[(int)XiaoSiXi] = &SuanFan::xiaoSiXi;
+	func[(int)XiaoSanYuan] = &SuanFan::xiaoSanYuan;
+	func[(int)ZiYiSe] = &SuanFan::ziYiSe;
+	func[(int)SiAnKe] = &SuanFan::siAnKe;
+	func[(int)YiSeShuangLongHui] = &SuanFan::yiSeShuangLongHui;
+	func[(int)YiSeSiTongShun] = &SuanFan::yiSeSiTongShun;
+	func[(int)YiSeSiJieGao] = &SuanFan::yiSeSiJieGao;
+	func[(int)YiSeSiBuGao] = &SuanFan::yiSeSiBuGao;
+	func[(int)SanGang] = &SuanFan::sanGang;
+	func[(int)HunYaoJiu] = &SuanFan::hunYaoJiu;
+	func[(int)QiDui] = &SuanFan::qiDui;
+	func[(int)QiXingBuKao] = &SuanFan::qiXingBuKao;
+	func[(int)QuanShuangKe] = &SuanFan::quanShuangKe;
+	func[(int)QingYiSe] = &SuanFan::qingYiSe;
+	func[(int)YiSeSanJieGao] = &SuanFan::yiSeSanJieGao;
+	func[(int)YiSeSanTongShun] = &SuanFan::yiSeSanTongShun;
+	func[(int)QuanDa] = &SuanFan::quanDa;
+	func[(int)QuanZhong] = &SuanFan::quanZhong;
+	func[(int)QuanXiao] = &SuanFan::quanXiao;
+	func[(int)QingLong] = &SuanFan::qingLong;
+	func[(int)SanSeShuangLongHui] = &SuanFan::sanSeShuangLongHui;
+	func[(int)YiSeSanBuGao] = &SuanFan::yiSeSanBuGao;
+	func[(int)QuanDaiWu] = &SuanFan::quanDaiWu;
+	func[(int)SanTongKe] = &SuanFan::sanTongKe;
+	func[(int)SanAnKe] = &SuanFan::sanAnKe;
+	func[(int)QuanBuKao] = &SuanFan::quanBuKao;
+	func[(int)ZuHeLong] = &SuanFan::zuHeLong;
+	func[(int)DaYuWu] = &SuanFan::daYuWu;
+	func[(int)XiaoYuWu] = &SuanFan::xiaoYuWu;
+	func[(int)SanFengKe] = &SuanFan::sanFengKe;
+	func[(int)HuaLong] = &SuanFan::huaLong;
+	func[(int)TuiBuDao] = &SuanFan::tuiBuDao;
+	func[(int)SanSeSanTongShun] = &SuanFan::sanSeSanTongShun;
+	func[(int)SanSeSanJieGao] = &SuanFan::sanSeSanJieGao;
+	func[(int)WuFanHu] = &SuanFan::wuFanHu;
+	func[(int)MiaoShouHuiChun] = &SuanFan::miaoShouHuiChun;
+	func[(int)HaiDiLaoYue] = &SuanFan::haiDiLaoYue;
+	func[(int)GangShangKaiHua] = &SuanFan::gangShangKaiHua;
+	func[(int)QiangGangHu] = &SuanFan::qiangGangHu;
+	func[(int)PengPengHu] = &SuanFan::pengPengHu;
+	func[(int)HunYiSe] = &SuanFan::hunYiSe;
+	func[(int)SanSeSanBuGao] = &SuanFan::sanSeSanBuGao;
+	func[(int)WuMenQi] = &SuanFan::wuMenQi;
+	func[(int)QuanQiuRen] = &SuanFan::quanQiuRen;
+	func[(int)ShuangAnGang] = &SuanFan::shuangAnGang;
+	func[(int)ShuangJianKe] = &SuanFan::shuangJianKe;
+	func[(int)QuanDaiYao] = &SuanFan::quanDaiYao;
+	func[(int)BuQiuRen] = &SuanFan::buQiuRen;
+	func[(int)ShuangMingGang] = &SuanFan::shuangMingGang;
+	func[(int)HuJueZhang] = &SuanFan::huJueZhang;
+	func[(int)JianKe] = &SuanFan::jianKe;
+	func[(int)QuanFengKe] = &SuanFan::quanFengKe;
+	func[(int)MenFengKe] = &SuanFan::menFengKe;
+	func[(int)MenQianQing] = &SuanFan::menQianQing;
+	func[(int)PingHu] = &SuanFan::pingHu;
+	func[(int)SiGuiYi] = &SuanFan::siGuiYi;
+	func[(int)ShuangTongKe] = &SuanFan::shuangTongKe;
+	func[(int)ShuangAnKe] = &SuanFan::shuangAnKe;
+	func[(int)AnGang] = &SuanFan::anGang;
+	func[(int)DuanYao] = &SuanFan::duanYao;
+	func[(int)YiBanGao] = &SuanFan::yiBanGao;
+	func[(int)XiXiangFeng] = &SuanFan::xiXiangFeng;
+	func[(int)LianLiu] = &SuanFan::lianLiu;
+	func[(int)LaoShaoFu] = &SuanFan::laoShaoFu;
+	func[(int)MingGang] = &SuanFan::mingGang;
+	func[(int)YaoJiuKe] = &SuanFan::yaoJiuKe;
+	func[(int)QueYiMen] = &SuanFan::queYiMen;
+	func[(int)WuZi] = &SuanFan::wuZi;
+	func[(int)BianZhang] = &SuanFan::bianZhang;
+	func[(int)KeZhang] = &SuanFan::keZhang;
+	func[(int)DanDiaoJiang] = &SuanFan::danDiaoJiang;
+	func[(int)ZiMo] = &SuanFan::ziMo;
+
+
+
+int SuanFan::daSiXi()
+{
+
+	return 0;
+}
+
+
+int SuanFan::daSanYuan()
+{
+
+	return 0;
+}
+
+
+int SuanFan::lvYiSe()
+{
+
+	return 0;
+}
+
+
+int SuanFan::jiuBaoLianDeng()
+{
+
+	return 0;
+}
+
+
+int SuanFan::siGang()
+{
+
+	return 0;
+}
+
+
+int SuanFan::lianQiDui()
+{
+
+	return 0;
+}
+
+
+int SuanFan::shiSanYao()
+{
+
+	return 0;
+}
+
+
+int SuanFan::qingYaoJiu()
+{
+
+	return 0;
+}
+
+
+int SuanFan::xiaoSiXi()
+{
+
+	return 0;
+}
+
+
+int SuanFan::xiaoSanYuan()
+{
+
+	return 0;
+}
+
+
+int SuanFan::ziYiSe()
+{
+
+	return 0;
+}
+
+
+int SuanFan::siAnKe()
+{
+
+	return 0;
+}
+
+
+int SuanFan::yiSeShuangLongHui()
+{
+
+	return 0;
+}
+
+
+int SuanFan::yiSeSiTongShun()
+{
+
+	return 0;
+}
+
+
+int SuanFan::yiSeSiJieGao()
+{
+
+	return 0;
+}
+
+
+int SuanFan::yiSeSiBuGao()
+{
+
+	return 0;
+}
+
+
+int SuanFan::sanGang()
+{
+
+	return 0;
+}
+
+
+int SuanFan::hunYaoJiu()
+{
+
+	return 0;
+}
+
+
+int SuanFan::qiDui()
+{
+
+	return 0;
+}
+
+
+int SuanFan::qiXingBuKao()
+{
+
+	return 0;
+}
+
+
+int SuanFan::quanShuangKe()
+{
+
+	return 0;
+}
+
+
+int SuanFan::qingYiSe()
+{
+
+	return 0;
+}
+
+
+int SuanFan::yiSeSanJieGao()
+{
+
+	return 0;
+}
+
+
+int SuanFan::yiSeSanTongShun()
+{
+
+	return 0;
+}
+
+
+int SuanFan::quanDa()
+{
+
+	return 0;
+}
+
+
+int SuanFan::quanZhong()
+{
+
+	return 0;
+}
+
+
+int SuanFan::quanXiao()
+{
+
+	return 0;
+}
+
+
+int SuanFan::qingLong()
+{
+
+	return 0;
+}
+
+
+int SuanFan::sanSeShuangLongHui()
+{
+
+	return 0;
+}
+
+
+int SuanFan::yiSeSanBuGao()
+{
+
+	return 0;
+}
+
+
+int SuanFan::quanDaiWu()
+{
+
+	return 0;
+}
+
+
+int SuanFan::sanTongKe()
+{
+
+	return 0;
+}
+
+
+int SuanFan::sanAnKe()
+{
+
+	return 0;
+}
+
+
+int SuanFan::quanBuKao()
+{
+
+	return 0;
+}
+
+
+int SuanFan::zuHeLong()
+{
+
+	return 0;
+}
+
+
+int SuanFan::daYuWu()
+{
+
+	return 0;
+}
+
+
+int SuanFan::xiaoYuWu()
+{
+
+	return 0;
+}
+
+
+int SuanFan::sanFengKe()
+{
+
+	return 0;
+}
+
+
+int SuanFan::huaLong()
+{
+
+	return 0;
+}
+
+
+int SuanFan::tuiBuDao()
+{
+
+	return 0;
+}
+
+
+int SuanFan::sanSeSanTongShun()
+{
+
+	return 0;
+}
+
+
+int SuanFan::sanSeSanJieGao()
+{
+
+	return 0;
+}
+
+
+int SuanFan::wuFanHu()
+{
+
+	return 0;
+}
+
+
+int SuanFan::miaoShouHuiChun()
+{
+
+	return 0;
+}
+
+
+int SuanFan::haiDiLaoYue()
+{
+
+	return 0;
+}
+
+
+int SuanFan::gangShangKaiHua()
+{
+
+	return 0;
+}
+
+
+int SuanFan::qiangGangHu()
+{
+
+	return 0;
+}
+
+
+int SuanFan::pengPengHu()
+{
+
+	return 0;
+}
+
+
+int SuanFan::hunYiSe()
+{
+
+	return 0;
+}
+
+
+int SuanFan::sanSeSanBuGao()
+{
+
+	return 0;
+}
+
+
+int SuanFan::wuMenQi()
+{
+
+	return 0;
+}
+
+
+int SuanFan::quanQiuRen()
+{
+
+	return 0;
+}
+
+
+int SuanFan::shuangAnGang()
+{
+
+	return 0;
+}
+
+
+int SuanFan::shuangJianKe()
+{
+
+	return 0;
+}
+
+
+int SuanFan::quanDaiYao()
+{
+
+	return 0;
+}
+
+
+int SuanFan::buQiuRen()
+{
+
+	return 0;
+}
+
+
+int SuanFan::shuangMingGang()
+{
+
+	return 0;
+}
+
+
+int SuanFan::huJueZhang()
+{
+
+	return 0;
+}
+
+
+int SuanFan::jianKe()
+{
+
+	return 0;
+}
+
+
+int SuanFan::quanFengKe()
+{
+
+	return 0;
+}
+
+
+int SuanFan::menFengKe()
+{
+
+	return 0;
+}
+
+
+int SuanFan::menQianQing()
+{
+
+	return 0;
+}
+
+
+int SuanFan::pingHu()
+{
+
+	return 0;
+}
+
+
+int SuanFan::siGuiYi()
+{
+
+	return 0;
+}
+
+
+int SuanFan::shuangTongKe()
+{
+
+	return 0;
+}
+
+
+int SuanFan::shuangAnKe()
+{
+
+	return 0;
+}
+
+
+int SuanFan::anGang()
+{
+
+	return 0;
+}
+
+
+int SuanFan::duanYao()
+{
+
+	return 0;
+}
+
+
+int SuanFan::yiBanGao()
+{
+
+	return 0;
+}
+
+
+int SuanFan::xiXiangFeng()
+{
+
+	return 0;
+}
+
+
+int SuanFan::lianLiu()
+{
+
+	return 0;
+}
+
+
+int SuanFan::laoShaoFu()
+{
+
+	return 0;
+}
+
+
+int SuanFan::mingGang()
+{
+
+	return 0;
+}
+
+
+int SuanFan::yaoJiuKe()
+{
+
+	return 0;
+}
+
+
+int SuanFan::queYiMen()
+{
+
+	return 0;
+}
+
+
+int SuanFan::wuZi()
+{
+
+	return 0;
+}
+
+
+int SuanFan::bianZhang()
+{
+
+	return 0;
+}
+
+
+int SuanFan::keZhang()
+{
+
+	return 0;
+}
+
+
+int SuanFan::danDiaoJiang()
+{
+
+	return 0;
+}
+
+
+int SuanFan::ziMo()
+{
+
+	return 0;
+}
+
+
