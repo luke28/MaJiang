@@ -753,7 +753,8 @@ int SuanFan::yiSeSiBuGao()
 	for(i=1;i<nowFan.size();i++){
 		if(nowFan[i].type != SHUN)
 		 	break;
-		if(i!=nowFan.size()-1 && nowFan[i].first != nowFan[i+1].first+1)
+		//cout<<nowFan[i].first<<" "<<nowFan[i+1].first;
+		if(i!=nowFan.size()-1 && nowFan[i].first != nowFan[i+1].first-1)
 			break;
 	}
 	if(i == nowFan.size())
@@ -761,7 +762,7 @@ int SuanFan::yiSeSiBuGao()
 	for(i=1;i<nowFan.size();i++){
 		if(nowFan[i].type != SHUN)
 		 	return 0;
-		if(i!=nowFan.size()-1 && nowFan[i].first != nowFan[i+1].first+2)
+		if(i!=nowFan.size()-1 && nowFan[i].first != nowFan[i+1].first-2)
 			return 0;
 	}	
 	return 1;
