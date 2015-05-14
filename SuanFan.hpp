@@ -598,42 +598,85 @@ int SuanFan::shiSanYao()
 
 int SuanFan::qingYaoJiu()
 {
-
-	return 0;
+	for(int i=0;i<nowFan.size();i++){
+		Word tmp = nowFan[i];
+		if(tmp.type == SHUN){
+			return 0;
+		}
+		Pai p = paiSet[tmp.first];
+		if((int)p.type >= 3){
+			return 0;
+		}
+		if(p.num != 1 && p.num != 9)
+		{
+			return 0;
+		}
+	}
+	return 1;
 }
 
 
 int SuanFan::xiaoSiXi()
 {
-
+	int num = 0;
+	if(paiSet[nowFan[0].first].type != FENG){
+		return 0;
+	} 
+	for(int i=1;i<nowFan.size();i++){
+		Word tmp = nowFan[i];
+		if(paiSet[tmp.first].type == FENG){
+			num++;
+		} 
+	}
+	if(num == 3){
+		return 1;
+	}
 	return 0;
 }
 
 
 int SuanFan::xiaoSanYuan()
 {
-
+	int num = 0;
+	if(paiSet[nowFan[0].first].type != YUAN){
+		return 0;
+	} 
+	for(int i=1;i<nowFan.size();i++){
+		Word tmp = nowFan[i];
+		if(paiSet[tmp.first].type == YUAN){
+			num++;
+		} 
+	}
+	if(num == 2){
+		return 1;
+	}
 	return 0;
 }
 
 
 int SuanFan::ziYiSe()
 {
-
-	return 0;
+	for(int i=0;i<nowFan.size();i++){
+		Word tmp = nowFan[i];
+		if(paiSet[tmp.first].type == YUAN || paiSet[tmp.first].type == FENG){
+			continue;
+		}
+		return 0;
+	}
+	return 1;
 }
 
 
 int SuanFan::siAnKe()
 {
-
+	
 	return 0;
 }
 
 
 int SuanFan::yiSeShuangLongHui()
 {
-
+	
 	return 0;
 }
 
