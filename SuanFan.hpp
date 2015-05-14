@@ -73,6 +73,10 @@ bool cmpWord(Word x,Word y){
 		return 1;
 	if(y.type == DUI)
 		return 0;
+	if(x.type == SHUN)
+		return 0;
+	if(y.type == SHUN)
+		return 1;
 	return x.first < y.first;
 }
 
@@ -851,22 +855,58 @@ int SuanFan::qiXingBuKao()
 
 int SuanFan::quanShuangKe()
 {
-
-	return 0;
+	for(int i=0;i<nowFan.size();i++){
+		Word tmp = nowFan[i];
+		if(tmp.type == SHUN)
+			return 0;
+		if(paiSet[tmp.first].type >= FENG)
+			return 0;
+		for(int j=1;j<=9;j+=2){
+			if(paiSet[tmp.first].num == j)
+				return 0;	
+		}
+	}
+	return 1;
 }
 
 
 int SuanFan::qingYiSe()
 {
-
-	return 0;
+	PaiType now = paiSet[nowFan[0].first].type;
+	if(now >= FENG)
+		return 0;
+	for(int i=1;i<nowFan.size();i++){
+		if(paiSet[nowFan[i].first].type != now)
+			return 0;
+	}
+	return 1;
 }
 
 
 int SuanFan::yiSeSanJieGao()
 {
-
-	return 0;
+	vector<Word> nowF(nowFan);
+/*	for(int i=0;i<nowF.size();i++){
+		cout<<nowF[i].type<<' '<<nowF[i].first<<endl;
+	}*/
+	sort(nowF.begin(),nowF.end(),cmpWord);
+/*	for(int i=0;i<nowF.size();i++){
+		cout<<nowF[i].first<<endl;
+	}*/
+	PaiType now = paiSet[nowF[1].first].type;
+	if(now >= FENG)
+		return 0;
+	if(nowF[1].type != KE && nowF[1].type != GANG)
+		return 0;
+	if(paiSet[nowF[1].first].num >= 8)
+		return 0;
+	for(int i=2;i<nowF.size()-1;i++){
+		if(nowF[i].type != KE && nowF[i].type != GANG)
+		 	return 0;
+		if(nowF[i].first != nowF[i - 1].first + 1)
+			return 0;
+	}
+	return 1;
 }
 
 
