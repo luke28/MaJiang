@@ -86,7 +86,7 @@ struct SuanFan{
 	vector<int> ansVec;
 	//标记这种番型要用到的Word索引
 	//vector<int> mark_word[MAXFAN];
-	vector<
+	bool mark_word[MAXFAN];
 	//存储所得番型
 	vector<Word> nowFan;
 	//当前划词状态下剩余手牌 
@@ -240,7 +240,7 @@ pair<int,vector<int> > SuanFan::getFanShu(){
 	for(int i=0;i<m;i++){
 		rest.pb(huPai[i]);
 	}
-	void TePan();
+	TePan();
 	//取出所有对子 
 	for(int i=0;i<m-1;i++){
 		if(mark_dui[huPai[i]] == 0 && huPai[i] == huPai[i+1]){
@@ -360,6 +360,7 @@ void SuanFan::findGang(int dep){
 
 int SuanFan::Cal(vector<int>& vec){
 	int ret = 0;
+	memset(mark_word,0,sizeof(mark_word));
 	print_nowFan();
 	for(int i=0;i<MAXFAN;i++){
 		if(func[i] != NULL){
@@ -387,12 +388,22 @@ int SuanFan::Cal(vector<int>& vec){
 					nowFan.erase(nowFan.begin()+j);
 				}
 			}*/
+			bool flag = 0;
+			for(int j=0;j<fuGai[i].size();j++){
+				if(mark_word[fuGai[i][j]] != 0){
+					flag = 1;
+					break;
+				}
+					
+			}
+			if(flag == 1)
+				continue;
 			int num = (this->*func[i])();
 			ret += num * fanShu[i];
+			mark_word[i] = num;
 			for(int j=0;j<num;j++){
 				vec.pb(i);
 			}
-			nowFan = saveWord;
 		}	
 	}
 	return ret;
@@ -400,10 +411,54 @@ int SuanFan::Cal(vector<int>& vec){
 
 
 void SuanFan::TePan(){
-	
+	if(lianQiDui() == 1){
+		ans = fanShu[(int)LianQiDui];
+		ansVec.pb((int)LianQiDui);
+		if(isZiMo == 1){
+			ans += fanShu[(int)ZiMo];
+			ansVec.pb((int)ZiMo);
+		}
+		return;
+	}
+	if(shiSanYao() == 1){
+		ans = fanShu[(int)ShiSanYao];
+		ansVec.pb((int)ShiSanYao);
+		if(isZiMo == 1){
+			ans += fanShu[(int)ZiMo];
+			ansVec.pb((int)ZiMo);
+		}
+		return;
+	}
+	if(qiDui() == 1){
+		ans = fanShu[(int)QiDui];
+		ansVec.pb((int)QiDui);
+		if(isZiMo == 1){
+			ans += fanShu[(int)ZiMo];
+			ansVec.pb((int)ZiMo);
+		}
+		return;
+	}
+	if(qiXingBuKao()==1){
+		ans = fanShu[(int)QiXingBuKao];
+		ansVec.pb((int)QiXingBuKao);
+		if(isZiMo == 1){
+			ans += fanShu[(int)ZiMo];
+			ansVec.pb((int)ZiMo);
+		}
+		return;
+	}
+	if(quanBuKao() == 1){
+		ans = fanShu[(int)QuanBuKao];
+		ansVec.pb((int)QuanBuKao);
+		if(isZiMo == 1){
+			ans += fanShu[(int)ZiMo];
+			ansVec.pb((int)ZiMo);
+		}
+		return;
+	}
 }
 
-
+//大四喜 
 int SuanFan::daSiXi()
 {
 	int i;
@@ -415,14 +470,12 @@ int SuanFan::daSiXi()
 		return 0;
 	}
 	if(i == 5){
-		for(i=1;i<5;i++)
-			mark_word[(int)DaSiXi].pb(i);
 		return 1;
 	}
 	return 0;
 }
 
-
+//大三元 
 int SuanFan::daSanYuan()
 {
 	int cnt = 0;
@@ -435,14 +488,12 @@ int SuanFan::daSanYuan()
 		}
 	}
 	if(cnt == 3){
-		for(int i=0;i<3;i++)
-			mark_word
-	}
 		return 1;
+	}	
 	return 0;
 }
 
-
+//绿一色 
 int SuanFan::lvYiSe()
 {
 	for(int i=0;i<m;i++){
@@ -452,32 +503,96 @@ int SuanFan::lvYiSe()
 	return 1;
 }
 
-
+//九宝莲灯 
 int SuanFan::jiuBaoLianDeng()
 {
-
+	if(m != 14)
+		return 0;
+	int i,j;
+	j = huPai[0];
+	if(j != 0 && j != 9 && j != 18){
+		return 0;
+	}
+	int pei[13] ={0,0,0,1,2,3,4,5,6,7,8,8,8};
+	int flag = 0;
+	for(i=1;i<m;i++){
+		if(i == m-1 && flag==0){
+			if(paiSet[huPai[i]].type == paiSet[j].type)
+				continue;
+			else
+				break;
+		}
+		if(pei[i-flag]+j != huPai[i]){
+			if(flag == 0 && paiSet[huPai[i]].type == paiSet[j].type)
+				flag = 1;
+			else
+				break;
+		}
+	}
+	if(i==m){
+		return 1;
+	}
 	return 0;
 }
 
-
+//四杠 
 int SuanFan::siGang()
 {
-
+	if(m == 18)
+		return 1;
 	return 0;
 }
 
-
+//连七对 
 int SuanFan::lianQiDui()
 {
-
-	return 0;
+	if(m != 14)
+		return 0;
+	int i,j;
+	j = huPai[0];
+	for(i=0;i<3;i++){
+		if(j == i){
+			break;
+		}
+		if(j == 9+i){
+			break;
+		}
+		if(j==18+i){
+			break;
+		}
+	}
+	if(i == 3){
+		return 0;
+	}
+	int pei[14]={0,0,1,1,2,2,3,3,4,4,5,5,6,6};
+	for(int i=0;i<m;i+=2){
+		if(j+(i>>1) != huPai[i] || huPai[i] != huPai[i+1]){
+			return 0;
+		}
+	}
+	return 1;
 }
 
-
+//十三幺 
 int SuanFan::shiSanYao()
 {
-
-	return 0;
+	int pei[13] ={0,8,9,17,18,26,27,28,29,30,31,32,33};
+	int flag = 0;
+	for(int i=1;i<m;i++){
+		if(i == m-1 && flag==0){
+			if(binary_search(pei,pei+13,huPai[i]) == 1)
+				continue;
+			else
+				return 0;
+		}
+		if(pei[i-flag] != huPai[i]){
+			if(flag == 0 && binary_search(pei,pei+13,huPai[i]) == 1)
+				flag = 1;
+			else
+				return 0;
+		}
+	}
+	return 1;
 }
 
 
@@ -1098,7 +1213,7 @@ SuanFan::SuanFan(){
 	func[(int)DaSiXi] = &SuanFan::daSiXi;
 	func[(int)DaSanYuan] = &SuanFan::daSanYuan;
 	func[(int)LvYiSe] = &SuanFan::lvYiSe;
-	//func[(int)JiuBaoLianDeng] = &SuanFan::jiuBaoLianDeng;
+	func[(int)JiuBaoLianDeng] = &SuanFan::jiuBaoLianDeng;
 	func[(int)SiGang] = &SuanFan::siGang;
 	//func[(int)LianQiDui] = &SuanFan::lianQiDui;
 	//func[(int)ShiSanYao] = &SuanFan::shiSanYao;
@@ -1349,15 +1464,15 @@ SuanFan::SuanFan(){
 	//全求人
 	fuGai[(int)DanDiaoJiang].pb((int)QuanQiuRen); 
 	//圈风刻
-	fuGai[(int)YaoJiuKe].pb((int)QuanFengKe);  
+	//fuGai[(int)YaoJiuKe].pb((int)QuanFengKe);  
 	//门风刻 
-	fuGai[(int)YaoJiuKe].pb((int)MenFengKe); 
+	//fuGai[(int)YaoJiuKe].pb((int)MenFengKe); 
 	//平胡
 	fuGai[(int)WuZi].pb((int)PingHu);  
 	//断幺
 	fuGai[(int)WuZi].pb((int)DuanYao);  
 	//不求人(后加)
-	fuGai[(int)MenQing].pb((int)BuQiuRen);  
+	fuGai[(int)MenQianQing].pb((int)BuQiuRen);  
 	fuGai[(int)ZiMo].pb((int)BuQiuRen);	
 }
 
