@@ -69,7 +69,9 @@ struct Word{
 };
 
 bool cmpWord(Word x,Word y){
-	if(x.type == DUI && y.type != DUI)
+	if(x.type == DUI)
+		return 1;
+	if(y.type == DUI)
 		return 0;
 	return x.first < y.first;
 }
@@ -719,7 +721,13 @@ int SuanFan::yiSeSiTongShun()
 int SuanFan::yiSeSiJieGao()
 {
 	vector<Word> nowF(nowFan);
+	for(int i=0;i<nowF.size();i++){
+		cout<<nowF[i].type<<' '<<nowF[i].first<<endl;
+	}
 	sort(nowF.begin(),nowF.end(),cmpWord);
+	for(int i=0;i<nowF.size();i++){
+		cout<<nowF[i].first<<endl;
+	}
 	PaiType now = paiSet[nowF[1].first].type;
 	if(now >= FENG)
 		return 0;
@@ -804,7 +812,7 @@ int SuanFan::qiXingBuKao()
 	if(m != 14)
 		return 0;
 	for(int i=0;i<7;i++){
-		if(huPai[m-i] != MAXPAI-i){
+		if(huPai[m-i-1] != MAXPAI-i-1){
 			return 0;
 		}
 	}
@@ -935,9 +943,12 @@ int SuanFan::quanBuKao()
 {
 	if(m != 14)
 		return 0;
+	int flag = 0;
 	for(int i=0;i<7;i++){
-		if(huPai[m-i] != MAXPAI-i){
-			return 0;
+		if(huPai[m-i] != MAXPAI-i-flag){
+			if(flag == 1){
+				
+			}
 		}
 	}
 	int res = m - 7;
