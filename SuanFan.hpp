@@ -721,13 +721,13 @@ int SuanFan::yiSeSiTongShun()
 int SuanFan::yiSeSiJieGao()
 {
 	vector<Word> nowF(nowFan);
-	for(int i=0;i<nowF.size();i++){
+/*	for(int i=0;i<nowF.size();i++){
 		cout<<nowF[i].type<<' '<<nowF[i].first<<endl;
-	}
+	}*/
 	sort(nowF.begin(),nowF.end(),cmpWord);
-	for(int i=0;i<nowF.size();i++){
+/*	for(int i=0;i<nowF.size();i++){
 		cout<<nowF[i].first<<endl;
-	}
+	}*/
 	PaiType now = paiSet[nowF[1].first].type;
 	if(now >= FENG)
 		return 0;
@@ -943,15 +943,19 @@ int SuanFan::quanBuKao()
 {
 	if(m != 14)
 		return 0;
-	int flag = 0;
-	for(int i=0;i<7;i++){
-		if(huPai[m-i] != MAXPAI-i-flag){
-			if(flag == 1){
-				
-			}
+	int mar[7] = {0,0,0,0,0,0,0};
+	int cnt;
+	for(cnt=0;cnt<7;cnt++){
+		if(huPai[m-cnt-1] < 27){
+			break;
 		}
+		if(mar[huPai[m-cnt-1]-27] == 1)
+			return 0;
+		mar[huPai[m-cnt-1]-27] = 1;
 	}
-	int res = m - 7;
+	if(cnt < 5)
+		return 0;
+	int res = m - cnt;
 	int num[3]={0,0,0};
 	int sum[4]={0,0,0,0};
 	int mark[10] = {-1,0,1,2,0,1,2,0,1,2};
