@@ -67,8 +67,12 @@ struct Word{
 	Word(WordType w = DUI,int f = 0):type(w),first(f){
 	}
 };
- 
 
+bool cmpWord(Word x,Word y){
+	if(x.type == DUI && y.type != DUI)
+		return 0;
+	return x.first < y.first;
+}
 
 struct SuanFan{
 	typedef int (SuanFan::*PF) ();
@@ -673,60 +677,166 @@ int SuanFan::siAnKe()
 	return 0;
 }
 
-
+//一色双龙会 
 int SuanFan::yiSeShuangLongHui()
 {
-	
-	return 0;
+	if(m != 14)
+		return 0;
+	PaiType now = paiSet[nowFan[0].first].type;
+	if(paiSet[nowFan[0].first].num != 5)
+		return 0;
+	if(now >= FENG)
+		return 0;
+	int pei[4] = {1,1,7,7};
+	for(int i=1;i<nowFan.size();i++){
+		Word tmp = nowFan[i];
+		if(paiSet[tmp.first].type != now)
+			return 0;
+		if(tmp.type != SHUN)
+		 	return 0;
+		if(paiSet[tmp.first].num != pei[i-1]){
+			return 0;
+		}
+	}
+	return 1;
 }
 
-
+//一色四同顺 
 int SuanFan::yiSeSiTongShun()
 {
-
-	return 0;
+	if(m!=14)
+		return 0;
+	for(int i=1;i<nowFan.size();i++){
+		if(nowFan[i].type != SHUN)
+		 	return 0;
+		if(i!=nowFan.size()-1 && nowFan[i].first != nowFan[i+1].first)
+			return 0;
+	}
+	return 1;
 }
 
-
+//一色四节高 
 int SuanFan::yiSeSiJieGao()
 {
-
-	return 0;
+	vector<Word> nowF(nowFan);
+	sort(nowF.begin(),nowF.end(),cmpWord);
+	PaiType now = paiSet[nowF[1].first].type;
+	if(now >= FENG)
+		return 0;
+	if(nowF[1].type != KE && nowF[1].type != GANG)
+		return 0;
+	if(paiSet[nowF[1].first].num >= 7)
+		return 0;
+	for(int i=2;i<nowF.size();i++){
+		if(nowF[i].type != KE && nowF[i].type != GANG)
+		 	return 0;
+		if(nowF[i].first != nowF[i - 1].first + 1)
+			return 0;
+	}
+	return 1;
 }
 
-
+//一色四步高 
 int SuanFan::yiSeSiBuGao()
 {
-
-	return 0;
+	if(m!=14)
+		return 0;
+	int i;
+	for(i=1;i<nowFan.size();i++){
+		if(nowFan[i].type != SHUN)
+		 	break;
+		if(i!=nowFan.size()-1 && nowFan[i].first != nowFan[i+1].first+1)
+			break;
+	}
+	if(i == nowFan.size())
+		return 1;
+	for(i=1;i<nowFan.size();i++){
+		if(nowFan[i].type != SHUN)
+		 	return 0;
+		if(i!=nowFan.size()-1 && nowFan[i].first != nowFan[i+1].first+2)
+			return 0;
+	}	
+	return 1;
 }
 
-
+//三杠 
 int SuanFan::sanGang()
 {
-
+	if(m == 17)
+		return 1;
 	return 0;
 }
 
-
+//混幺九 
 int SuanFan::hunYaoJiu()
 {
-
-	return 0;
+	for(int i=0;i<nowFan.size();i++){
+		Word tmp = nowFan[i];
+		if(tmp.type == SHUN){
+			return 0;
+		}
+		Pai p = paiSet[tmp.first];
+		if((int)p.type < FENG){
+			if(p.num != 1 && p.num != 9)
+			{
+				return 0;
+			}
+		}
+	}
+	return 1;
 }
 
 
 int SuanFan::qiDui()
 {
-
-	return 0;
+	if(m != 14)
+		return 0;
+	for(int i=0;i<m;i+=2){
+		if(huPai[i] != huPai[i+1])
+			return 0;
+	}
+	return 1;
 }
 
 
 int SuanFan::qiXingBuKao()
 {
-
-	return 0;
+	if(m != 14)
+		return 0;
+	for(int i=0;i<7;i++){
+		if(huPai[m-i] != MAXPAI-i){
+			return 0;
+		}
+	}
+	int res = m - 7;
+	int num[3]={0,0,0};
+	int sum[4]={0,0,0,0};
+	int mark[10] = {-1,0,1,2,0,1,2,0,1,2};
+	int mark_se[3] = {0,0,0};
+	for(int i=0;i<res;i++){
+		if(paiSet[huPai[i]].type >= FENG)
+			return 0;
+		num[(int)(paiSet[huPai[i]].type)]++;
+	}
+	sum[1] = num[0];
+	sum[2] = sum[1] + num[1];
+	sum[3] = sum[2] + num[2];
+	for(int i=0;i<3;i++){
+		if(num[i]<1 || num[i]>3)
+			return 0;
+		int now = mark[paiSet[huPai[sum[i]]].num];
+		if(mark_se[now] == 1)
+			return 0;
+		mark_se[now] = 1; 
+		for(int j=sum[i]+1;j<sum[i+1];j++){
+			if(huPai[j] == huPai[j-1])
+				return 0;
+			if(mark[paiSet[huPai[j]].num] != now){
+				return 0;
+			}
+		}
+	}
+	return 1;
 }
 
 
@@ -823,8 +933,42 @@ int SuanFan::sanAnKe()
 
 int SuanFan::quanBuKao()
 {
-
-	return 0;
+	if(m != 14)
+		return 0;
+	for(int i=0;i<7;i++){
+		if(huPai[m-i] != MAXPAI-i){
+			return 0;
+		}
+	}
+	int res = m - 7;
+	int num[3]={0,0,0};
+	int sum[4]={0,0,0,0};
+	int mark[10] = {-1,0,1,2,0,1,2,0,1,2};
+	int mark_se[3] = {0,0,0};
+	for(int i=0;i<res;i++){
+		if(paiSet[huPai[i]].type >= FENG)
+			return 0;
+		num[(int)(paiSet[huPai[i]].type)]++;
+	}
+	sum[1] = num[0];
+	sum[2] = sum[1] + num[1];
+	sum[3] = sum[2] + num[2];
+	for(int i=0;i<3;i++){
+		if(num[i]<1 || num[i]>3)
+			return 0;
+		int now = mark[paiSet[huPai[sum[i]]].num];
+		if(mark_se[now] == 1)
+			return 0;
+		mark_se[now] = 1; 
+		for(int j=sum[i]+1;j<sum[i+1];j++){
+			if(huPai[j] == huPai[j-1])
+				return 0;
+			if(mark[paiSet[huPai[j]].num] != now){
+				return 0;
+			}
+		}
+	}
+	return 1;
 }
 
 
