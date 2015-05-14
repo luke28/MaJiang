@@ -912,8 +912,24 @@ int SuanFan::yiSeSanJieGao()
 
 int SuanFan::yiSeSanTongShun()
 {
-
-	return 0;
+	if(m!=14)
+		return 0;
+	int i;
+	for(i=1;i<nowFan.size()-1;i++){
+		if(nowFan[i].type != SHUN)
+		 	break;
+		if(i!=nowFan.size()-2 && nowFan[i].first != nowFan[i+1].first)
+			break;
+	}
+	if(i == nowFan.size()-1)
+		return 1;
+	for(int i=2;i<nowFan.size();i++){
+		if(nowFan[i].type != SHUN)
+		 	return 0;
+		if(i!=nowFan.size()-1 && nowFan[i].first != nowFan[i+1].first)
+			return 0;
+	}
+	return 1;
 }
 
 
