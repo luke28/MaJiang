@@ -91,6 +91,8 @@ struct SuanFan{
 	PF func[MAXFAN];
 	int fanShu[MAXFAN];
 	vector<int> fuGai[MAXFAN];  
+	//哪些是用牌直接判番的
+	vector<int> mark_qidui;
 //和算番过程相关的变量 
 	int ans;
 	vector<int> ansVec;
@@ -428,6 +430,10 @@ void SuanFan::TePan(){
 			ans += fanShu[(int)ZiMo];
 			ansVec.pb((int)ZiMo);
 		}
+		if((this->*func[(int)DuanYao])() == 1){
+			ans += fanShu[(int)DuanYao];
+			ansVec.pb((int)DuanYao);
+		}
 		return;
 	}
 	if(shiSanYao() == 1){
@@ -445,6 +451,25 @@ void SuanFan::TePan(){
 		if(isZiMo == 1){
 			ans += fanShu[(int)ZiMo];
 			ansVec.pb((int)ZiMo);
+		}
+		memset(mark_word,0,sizeof(mark_word));
+		for(int i=0;i<mark_qidui.size();i++){
+			bool flag = 0;
+			for(int j=0;j<fuGai[mark_qidui[i]].size();j++){
+				if(mark_word[fuGai[mark_qidui[i]][j]] != 0){
+					flag = 1;
+					break;
+				}
+					
+			}
+			if(flag == 1)
+				continue;
+			int num = (this->*func[mark_qidui[i]])();
+			ans += num * fanShu[mark_qidui[i]];
+			mark_word[mark_qidui[i]] = num;
+			for(int j=0;j<num;j++){
+				ansVec.pb(mark_qidui[i]);
+			}
 		}
 		return;
 	}
@@ -605,10 +630,10 @@ int SuanFan::shiSanYao()
 	return 1;
 }
 
-
+//清幺九 
 int SuanFan::qingYaoJiu()
 {
-	for(int i=0;i<nowFan.size();i++){
+	/*for(int i=0;i<nowFan.size();i++){
 		Word tmp = nowFan[i];
 		if(tmp.type == SHUN){
 			return 0;
@@ -622,10 +647,17 @@ int SuanFan::qingYaoJiu()
 			return 0;
 		}
 	}
+	return 1;*/
+	for(int i=0;i<m;i++){
+		if(paiSet[huPai[i]].type >= FENG)
+			return 0;
+		if(paiSet[huPai[i]].num != 1 &&paiSet[huPai[i]].num != 9)
+			return 0;
+	}
 	return 1;
 }
 
-
+//小四喜 
 int SuanFan::xiaoSiXi()
 {
 	int num = 0;
@@ -644,7 +676,7 @@ int SuanFan::xiaoSiXi()
 	return 0;
 }
 
-
+//小三元 
 int SuanFan::xiaoSanYuan()
 {
 	int num = 0;
@@ -663,15 +695,19 @@ int SuanFan::xiaoSanYuan()
 	return 0;
 }
 
-
+//字一色 
 int SuanFan::ziYiSe()
 {
-	for(int i=0;i<nowFan.size();i++){
+	/*for(int i=0;i<nowFan.size();i++){
 		Word tmp = nowFan[i];
 		if(paiSet[tmp.first].type == YUAN || paiSet[tmp.first].type == FENG){
 			continue;
 		}
 		return 0;
+	}*/
+	for(int i=0;i<m;i++){
+		if(paiSet[huPai[i]].type < FENG)
+			return 0;
 	}
 	return 1;
 }
@@ -783,7 +819,7 @@ int SuanFan::sanGang()
 //混幺九 
 int SuanFan::hunYaoJiu()
 {
-	for(int i=0;i<nowFan.size();i++){
+/*	for(int i=0;i<nowFan.size();i++){
 		Word tmp = nowFan[i];
 		if(tmp.type == SHUN){
 			return 0;
@@ -796,10 +832,17 @@ int SuanFan::hunYaoJiu()
 			}
 		}
 	}
+	return 1;*/
+	for(int i=0;i<m;i++){
+		if(paiSet[huPai[i]].type >= FENG)
+			return 1;
+		if(paiSet[huPai[i]].num != 1 &&paiSet[huPai[i]].num != 9)
+			return 0;
+	}
 	return 1;
 }
 
-
+//七对 
 int SuanFan::qiDui()
 {
 	if(m != 14)
@@ -811,7 +854,7 @@ int SuanFan::qiDui()
 	return 1;
 }
 
-
+//七星不靠 
 int SuanFan::qiXingBuKao()
 {
 	if(m != 14)
@@ -852,7 +895,7 @@ int SuanFan::qiXingBuKao()
 	return 1;
 }
 
-
+//全双刻 
 int SuanFan::quanShuangKe()
 {
 	for(int i=0;i<nowFan.size();i++){
@@ -869,14 +912,18 @@ int SuanFan::quanShuangKe()
 	return 1;
 }
 
-
+//清一色 
 int SuanFan::qingYiSe()
 {
-	PaiType now = paiSet[nowFan[0].first].type;
+	PaiType now = paiSet[huPai[0]].type;
 	if(now >= FENG)
 		return 0;
-	for(int i=1;i<nowFan.size();i++){
+	/*for(int i=1;i<nowFan.size();i++){
 		if(paiSet[nowFan[i].first].type != now)
+			return 0;
+	}*/
+	for(int i=1;i<m;i++){
+		if(paiSet[huPai[i]].type != now)
 			return 0;
 	}
 	return 1;
@@ -930,22 +977,37 @@ int SuanFan::yiSeSanTongShun()
 
 int SuanFan::quanDa()
 {
-
-	return 0;
+	for(int i=0;i<m;i++){
+		if(paiSet[huPai[i]].type >= FENG)
+			return 0;
+		if(paiSet[huPai[i]].num < 7)
+			return 0;
+	}
+	return 1;
 }
 
 
 int SuanFan::quanZhong()
 {
-
-	return 0;
+	for(int i=0;i<m;i++){
+		if(paiSet[huPai[i]].type >= FENG)
+			return 0;
+		if(paiSet[huPai[i]].num < 4 || paiSet[huPai[i]].num > 6)
+			return 0;
+	}
+	return 1;
 }
 
 
 int SuanFan::quanXiao()
 {
-
-	return 0;
+	for(int i=0;i<m;i++){
+		if(paiSet[huPai[i]].type >= FENG)
+			return 0;
+		if(paiSet[huPai[i]].num > 3)
+			return 0;
+	}
+	return 1;
 }
 
 
@@ -1048,15 +1110,25 @@ int SuanFan::zuHeLong()
 
 int SuanFan::daYuWu()
 {
-
-	return 0;
+	for(int i=0;i<m;i++){
+		if(paiSet[huPai[i]].type >= FENG)
+			return 0;
+		if(paiSet[huPai[i]].num < 6)
+			return 0;
+	}
+	return 1;
 }
 
 
 int SuanFan::xiaoYuWu()
 {
-
-	return 0;
+	for(int i=0;i<m;i++){
+		if(paiSet[huPai[i]].type >= FENG)
+			return 0;
+		if(paiSet[huPai[i]].num > 4)
+			return 0;
+	}
+	return 1;
 }
 
 
@@ -1139,8 +1211,16 @@ int SuanFan::pengPengHu()
 
 int SuanFan::hunYiSe()
 {
-
-	return 0;
+	PaiType now = paiSet[huPai[0]].type;
+	if(now >= FENG)
+		return 1;
+	for(int i=1;i<m;i++){
+		if(paiSet[huPai[i]].type >= FENG)
+			return 1;
+		if(paiSet[huPai[i]].type != now)
+			return 0;
+	}
+	return 1;
 }
 
 
@@ -1153,7 +1233,18 @@ int SuanFan::sanSeSanBuGao()
 
 int SuanFan::wuMenQi()
 {
-
+	bool mark[5] = {0,0,0,0,0};
+	int num = 0;
+	PaiType now = paiSet[huPai[0]].type;
+	for(int i=0;i<m;i++){
+		PaiType now = paiSet[huPai[i]].type;
+		if(mark[(int)now]==0){
+			mark[(int)now] = 1;
+			num++;
+		}
+	}
+	if(num == 5)
+		return 1;
 	return 0;
 }
 
@@ -1181,7 +1272,7 @@ int SuanFan::shuangJianKe()
 
 int SuanFan::quanDaiYao()
 {
-
+	
 	return 0;
 }
 
@@ -1244,8 +1335,20 @@ int SuanFan::pingHu()
 
 int SuanFan::siGuiYi()
 {
-
-	return 0;
+	int ret = 14 - m;
+	int i;
+	//j+i把O(3*n)降为O(n+3) 
+	for(int j=0;j<m-3;j+=i)
+	{
+		for(i=1;i<=3;i++){
+			if(huPai[j+i] != huPai[j])
+				break;
+		}
+		if(i==4){
+			ret++;
+		}
+	}
+	return ret;
 }
 
 
@@ -1269,11 +1372,17 @@ int SuanFan::anGang()
 	return 0;
 }
 
-
+//断幺 
 int SuanFan::duanYao()
 {
-
-	return 0;
+	for(int i=0;i<m;i++){
+		if(paiSet[huPai[i]].type >= FENG)
+			return 0;
+		if(paiSet[huPai[i]].num == 1 || paiSet[huPai[i]].num == 9){
+			return 0;
+		}
+	}
+	return 1;
 }
 
 
@@ -1321,15 +1430,29 @@ int SuanFan::yaoJiuKe()
 
 int SuanFan::queYiMen()
 {
-
+	int mark[3] = {0,0,0};
+	int cnt = 0;
+	for(int i=0;i<m;i++){
+		if(paiSet[huPai[i]].type >= FENG)
+			break;
+		if(mark[(int)paiSet[huPai[i]].type] == 0){
+			mark[(int)paiSet[huPai[i]].type] = 1;
+			cnt++;
+		}
+	}
+	if(cnt < 3)
+		return 1;
 	return 0;
 }
 
 
 int SuanFan::wuZi()
 {
-
-	return 0;
+	for(int i=0;i<m;i++){
+		if(paiSet[huPai[i]].type >= FENG)
+			return 0;
+	}
+	return 1;
 }
 
 
@@ -1388,13 +1511,13 @@ int SuanFan::init(int in[],int mm,int men,int q,bool zimo, bool menQing)
 int SuanFan::getHashcode(Pai x)
 {
 	if((int)x.type < 3){
-		return (int)x.type * 9 + x.num;
+		return (int)x.type * 9 + x.num-1;
 	}
 		else if(x.type == FENG){
-		return 27 + x.num;
+		return 27 + x.num -1;
 	}
 	else{
-		return 31 + x.num;
+		return 31 + x.num-1;
 	}
 }
 
@@ -1612,6 +1735,8 @@ SuanFan::SuanFan(){
 	fuGai[(int)QuanDaiYao].pb((int)ZiYiSe);
 	fuGai[(int)YaoJiuKe].pb((int)ZiYiSe);
 	fuGai[(int)QueYiMen].pb((int)ZiYiSe);
+		//自加 
+	fuGai[(int)HunYiSe].pb((int)ZiYiSe);
 	//四暗刻
 	fuGai[(int)MenQianQing].pb((int)SiAnKe);
 	fuGai[(int)PengPengHu].pb((int)SiAnKe);
@@ -1625,6 +1750,8 @@ SuanFan::SuanFan(){
 	fuGai[(int)LaoShaoFu].pb((int)YiSeShuangLongHui);
 	fuGai[(int)QueYiMen].pb((int)YiSeShuangLongHui);
 	fuGai[(int)WuZi].pb((int)YiSeShuangLongHui);
+		//自加 
+	fuGai[(int)HunYiSe].pb((int)YiSeShuangLongHui);
 	//一色四同顺
 	fuGai[(int)YiSeSanJieGao].pb((int)YiSeSiTongShun);      
 	fuGai[(int)YiSeSanTongShun].pb((int)YiSeSiTongShun);      
@@ -1666,6 +1793,8 @@ SuanFan::SuanFan(){
 	//清一色
 	fuGai[(int)WuZi].pb((int)QingYiSe);
 	fuGai[(int)QueYiMen].pb((int)QingYiSe); 
+		//自加 
+	fuGai[(int)HunYiSe].pb((int)QingYiSe); 
 	//一色三节高
 	fuGai[(int)YiSeSanTongShun].pb((int)YiSeSanJieGao); 
 	//一色三同顺
@@ -1728,6 +1857,26 @@ SuanFan::SuanFan(){
 	//不求人(后加)
 	fuGai[(int)MenQianQing].pb((int)BuQiuRen);  
 	fuGai[(int)ZiMo].pb((int)BuQiuRen);	
+	
+	/**************设置mark_qidui***************/
+	mark_qidui.pb((int)LvYiSe);
+	mark_qidui.pb((int)QingYaoJiu);
+	mark_qidui.pb((int)ZiYiSe);
+	mark_qidui.pb((int)HunYaoJiu);
+	mark_qidui.pb((int)QingYiSe);
+	mark_qidui.pb((int)QuanDa);
+	mark_qidui.pb((int)QuanZhong);
+	mark_qidui.pb((int)QuanXiao);
+	mark_qidui.pb((int)DaYuWu);
+	mark_qidui.pb((int)XiaoYuWu);
+	mark_qidui.pb((int)TuiBuDao);
+	mark_qidui.pb((int)HunYiSe);
+	mark_qidui.pb((int)WuMenQi);
+	mark_qidui.pb((int)SiGuiYi);
+	mark_qidui.pb((int)DuanYao);
+	mark_qidui.pb((int)QueYiMen);
+	mark_qidui.pb((int)WuZi);
+		
 }
 
 

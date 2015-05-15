@@ -61,7 +61,7 @@ int main(){
 		printf("·¬Êý=%d\n",p.fi);
 		for(int i=0;i<p.se.size();i++){
 			print(p.se[i]);
-			printf("%d ",p.se[i]);
+			//printf("%d ",p.se[i]);
 		}
 		puts("");
 	}
