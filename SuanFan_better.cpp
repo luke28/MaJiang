@@ -56,14 +56,17 @@ int main(){
 	while(scanf("%d",&n) != EOF){
 		for(int i=0;i<n;i++)
 			in[i] = getOne();
-		sf.init(in,n);
+		if(sf.init(in,n) != 0)
+		{
+			cout<<"输入有误，请重新输入\n";
+			continue;
+		}
 		p = sf.getFanShu();
 		printf("番数=%d\n",p.fi);
 		for(int i=0;i<p.se.size();i++){
 			print(p.se[i]);
 			//printf("%d ",p.se[i]);
 		}
-		puts("");
 	}
 	return 0;
 }

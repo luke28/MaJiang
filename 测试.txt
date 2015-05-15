@@ -255,6 +255,23 @@ f1 f2 f3 f4 y1 y1 b1 b7 w3 w6 w9 t2 t5 t8
 14
 f1 f2 f3 f4 y1 y1 b1 b7 w3 w6 w9 t2 t5 t8
 
+//清龙
+14
+t1 t1 t1 t1 t2 t3 t4 t5 t6 t7 t8 t9 t9 t9
+15
+t1 t2 t3 t4 t5 t6 t7 t8 t9 f1 f1 f1 f1 f2 f2
+14
+t1 t1 t1 t1 t2 t3 t4 t5 t6 t7 t8 t9 w9 w9
+
+//三色双龙会
+14
+t1 t2 t3 b1 b2 b3 t7 t8 t9 b7 b8 b9 w5 w5
+14
+w1 w2 w3 b1 b2 b3 w7 w8 w9 b7 b8 b9 t5 t5
+//No
+14
+w1 w2 w3 b1 b2 b3 w6 w7 w8 b7 b8 b9 t5 t5
+
 
 //临时特殊测试
 //清一色+一色四步高
@@ -279,4 +296,162 @@ w8 w8 w8 w8 w9 w9 w9 w9 t7 t7 t9 t9 t9 t9
 14
 w6 w6 w7 w7 w7 w7 w8 w8 w8 w8 w9 w9 w9 w9
 
+//一色三步高
+14
+t1 t2 t3 t2 t3 t4 t3 t4 t5 b1 b1 b1 f4 f4
+14
+w1 w2 w3 w3 w4 w5 w5 w6 w7 b1 b1 b1 f4 f4
+//No
+14
+w1 w2 w3 w3 w4 w5 w4 w6 w5 b1 b1 b1 f4 f4
 
+//全带五
+15
+t5 t6 t7 t5 t5 t5 w5 w5 w5 w5 b3 b4 b5 b5 b5
+14
+t5 t6 t7 b3 b4 b5 t6 t5 t4 b3 b4 b5 b5 b5
+//No
+15
+t5 t6 t7 t5 t5 t5 w5 w5 w5 w5 b3 b4 b5 f4 f4
+
+//三同刻
+18
+t5 t5 t5 t5 b5 b5 b5 b5 w5 w5 w5 w5 w3 w3 w3 w3 f1 f1
+16
+t5 t5 t5 b5 b5 b5 w5 w5 w5 w5 w3 w3 w3 w3 t1 t1
+//No
+16
+t5 t5 b5 b5 b5 w5 w5 w5 w5 w3 w3 w3 w3 t1 t1 t1
+
+//全中
+14
+t5 t6 t4 b6 b4 b5 t6 t5 t4 b6 b4 b5 b5 b5
+
+//组合龙
+14
+w1 w4 w7 t2 t5 t8 b3 b6 b9 w6 w6 w6 t6 t6
+15
+t1 t4 t7 w2 w5 w8 b3 b6 b9 w6 w6 w6 t6 t6 w6
+14
+t1 t4 t7 b2 b5 b8 w3 w6 w9 w6 w6 w6 t6 t6
+14
+t1 t4 t7 w2 w5 w8 b3 b6 b9 t1 t2 t3 t1 t1
+//No
+15
+t5 t2 t8 w2 w5 w8 b3 b6 b9 w6 w6 w6 t6 t6 w6
+15
+t1 t4 t7 w2 w5 w8 b3 b6 b9 w6 w6 w6 b6 b6 b6
+14
+t1 t4 t7 w2 w5 w8 b3 b6 b9 f1 f2 f3 t1 t1
+
+
+//三风刻
+17
+f1 f1 f1 f1 f2 f2 f2 f2 f4 f4 f4 f4 t1 t2 t3 t4 t4
+14
+f1 f1 f1 f3 f3 f3 f4 f4 f4 y1 y1 y1 y2 y2
+//No
+14
+f1 f1 f1 f3 f3 f4 f4 f4 y1 y1 y1 y2 y2 y2
+
+
+//花龙
+14
+t1 t2 t3 b4 b5 b6 w7 w8 w9 t1 t2 t3 t1 t1
+14
+w1 w2 w3 b4 b5 b6 w7 w8 w9 t7 t8 t9 f1 f1
+15
+w1 w2 w3 b4 b5 b6 w7 w7 w7 w7 t7 t8 t9 f1 f1
+
+//推不倒
+14
+b1 b2 b3 b2 b3 b4 b8 b8 b8 t6 t6 y3 y3 y3
+14
+t2 t2 t4 t4 t5 t5 t8 t8 t9 t9 b8 b8 b9 b9
+
+//三色三同顺
+14
+t2 t3 t4 b2 b3 b4 w2 w3 w4 w4 w4 w4 t2 t2
+15
+t2 t3 t4 b2 b3 b4 w2 w3 w4 f4 f4 f4 f4 y2 y2
+
+//三色三节高
+16
+t1 t1 t1 t1 w3 w3 w3 b2 b2 b2 b2 w3 w4 w5 t2 t2
+17
+t9 t9 t9 w7 w7 w7 w7 b8 b8 b8 b8 f3 f3 f3 f3 t2 t2
+//No
+17
+t9 t9 t9 w1 w1 w1 w1 b2 b2 b2 b2 w3 w3 w3 w3 t2 t2
+
+//无番胡
+14
+w1 w2 w3 w3 w4 w5 b7 b8 b9 t7 t7 t7 f2 f2
+
+//碰碰胡
+14
+w1 w1 w1 w5 w5 w5 w9 w9 w9 b3 b3 b3 y1 y1
+17
+w3 w3 w3 w3 w5 w5 w5 b2 b2 b2 b2 b7 b7 b7 b7 b8 b8
+
+//双箭刻
+17
+y1 y1 y1 y1 y2 y2 y2 y2 f4 f4 f4 f4 t1 t2 t3 t4 t4
+14
+y1 y1 y1 y3 y3 y3 f4 f4 f4 f1 f1 f1 f2 f2
+
+//全带幺
+14
+w1 w2 w3 w9 w9 w9 b1 b2 b3 t1 t1 t1 f3 f3
+
+//幺九刻
+14
+w4 w5 w6 b1 b1 b1 b9 b9 b9 t9 t9 t9 f3 f3
+16
+w4 w5 w6 b1 b1 b1 b1 b9 b9 b9 t9 t9 t9 t9 f3 f3
+14
+f1 f1 f1 f3 f3 f3 f4 f4 f4 b1 b1 b1 y2 y2
+
+//平胡
+14
+w6 w7 w8 b1 b2 b3 b7 b8 b9 t3 t4 t5 t7 t7
+
+//双同刻
+16
+t5 t5 b5 b5 b5 w5 w5 w5 w5 w3 w3 w3 w3 t1 t1 t1
+14
+w5 w5 w5 b5 b5 b5 b7 b8 b9 t4 t4 t6 t6 t6
+
+//老少副
+14
+t1 t2 t3 t7 t8 t9 b1 b2 b3 b7 b8 b9 w1 w1
+14
+t1 t2 t3 t7 t8 t9 b1 b2 b3 b7 b8 b6 w1 w1
+//NO
+14
+t1 t2 t3 t7 t8 t9 t1 t2 t3 t7 t8 t9 w1 w1
+
+//一般高
+14
+w5 w6 w7 w5 w6 w7 b3 b3 b3 t7 t8 t9 f3 f3
+//NO
+14
+w5 w6 w7 w5 w6 w7 t7 t8 t9 t7 t8 t9 f3 f3
+
+//喜相逢
+14
+w2 w2 w2 w7 w6 w8 b6 b7 b8 t6 t6 t6 y3 y3
+16
+w2 w2 w2 w2 w7 w6 w8 b6 b7 b8 t6 t6 t6 t6 y3 y3
+14
+w2 w3 w4 w7 w6 w8 b6 b7 b8 t2 t3 t4 y3 y3
+
+//连六
+14
+w1 w2 w3 w4 w5 w6 t2 t3 t4 t5 t6 t7 t9 t9
+
+//三色三步高
+14
+w3 w4 w5 b4 b5 b6 t5 t6 t7 t9 t9 t9 f1 f1
+15
+b3 b4 b5 t4 t5 t6 w5 w6 w7 t9 t9 t9 t9 f1 f1
