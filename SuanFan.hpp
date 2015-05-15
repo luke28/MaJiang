@@ -886,13 +886,7 @@ int SuanFan::qingYiSe()
 int SuanFan::yiSeSanJieGao()
 {
 	vector<Word> nowF(nowFan);
-/*	for(int i=0;i<nowF.size();i++){
-		cout<<nowF[i].type<<' '<<nowF[i].first<<endl;
-	}*/
 	sort(nowF.begin(),nowF.end(),cmpWord);
-/*	for(int i=0;i<nowF.size();i++){
-		cout<<nowF[i].first<<endl;
-	}*/
 	PaiType now = paiSet[nowF[1].first].type;
 	if(now >= FENG)
 		return 0;
@@ -907,6 +901,7 @@ int SuanFan::yiSeSanJieGao()
 			return 0;
 	}
 	return 1;
+	//return 0;
 }
 
 
